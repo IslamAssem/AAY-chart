@@ -11,7 +11,7 @@ plugins {
     kotlin("native.cocoapods")
 }
 
-group = "io.github.islam"
+group = "com.github.islam"
 version = "1.1.0"
 
 kotlin {
@@ -121,7 +121,7 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     defaultConfig {
-        manifestPlaceholders["TheChance101"] = "io.github.thechance101"
+        manifestPlaceholders["TheChance101"] = "com.github.islam"
         minSdkVersion(21)
         targetSdkVersion(34)
     }

@@ -25,7 +25,7 @@ Add dependency in your module `build.gradle`
 
 ```kotlin
 dependencies {
-    implementation("io.github.thechance101:chart:$latest_release")
+    implementation("com.github.islam:chart:$latest_release")
 }
 ```
 
