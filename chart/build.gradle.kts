@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.composePlugin)
     id("com.android.library")
     alias(libs.plugins.dokka)
-    id("convention.publication")
+//    id("convention.publication")
     kotlin("native.cocoapods")
 }
 
