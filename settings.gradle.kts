@@ -1,6 +1,7 @@
 pluginManagement {
     repositories {
         google()
+        maven(url = "https://jitpack.io")
         gradlePluginPortal()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")

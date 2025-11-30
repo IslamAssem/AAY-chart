@@ -2,6 +2,7 @@
 allprojects {
     repositories {
         google()
+        maven(url = "https://jitpack.io")
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
