@@ -5,6 +5,7 @@ import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
@@ -61,6 +62,7 @@ internal fun DrawScope.drawQuarticLineWithShadow(
             )
         }
     }
+
 }
 
 @OptIn(ExperimentalTextApi::class)
@@ -87,7 +89,7 @@ fun DrawScope.drawLineAsQuadratic(
         val yTextLayoutResult = textMeasurer.measure(
             text = AnnotatedString(upperValue.formatToThousandsMillionsBillions()),
         ).size.width
-        val textSpace = yTextLayoutResult - (yTextLayoutResult/4)
+        val textSpace = yTextLayoutResult - (yTextLayoutResult / 4)
 
         val info = lineParameter.data[index]
         val nextInfo = lineParameter.data.getOrNull(index + 1) ?: lineParameter.data.last()
@@ -169,8 +171,5 @@ fun DrawScope.drawLineAsQuadratic(
 }
 
 private fun checkLastIndex(data: List<Double>, index: Int): Int {
-    return if (data[index] == data[data.lastIndex])
-        0
-    else
-        1
+    return if (index == data.lastIndex) 0 else 1
 }
