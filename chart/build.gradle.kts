@@ -7,8 +7,10 @@ plugins {
     alias(libs.plugins.composePlugin)
     id("com.android.library")
     alias(libs.plugins.dokka)
+
+    id ("maven-publish")
 //    id("convention.publication")
-    kotlin("native.cocoapods")
+//    kotlin("native.cocoapods")
 }
 
 group = "com.github.islam"
@@ -129,5 +131,19 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+
+afterEvaluate {
+    configure<PublishingExtension> {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.github.IslamAssem"
+                artifactId = "AAY-chart"
+                version = "1.0.0"
+                from(components["release"])
+            }
+        }
     }
 }
