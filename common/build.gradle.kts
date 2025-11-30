@@ -33,7 +33,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("io.github.islam:chart:1.1.0")
+                implementation("com.github.islam:chart:1.1.0")
 //                implementation(project(":chart"))
                 api(compose.runtime)
                 api(compose.foundation)
