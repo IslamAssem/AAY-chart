@@ -9,8 +9,8 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.aay"
-version = "1.0-SNAPSHOT"
+group = "com.islam"
+version = "1.1.0"
 
 kotlin {
     android()
@@ -33,8 +33,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-//                implementation("io.github.thechance101:chart:1.0")
-                implementation(project(":chart"))
+                implementation("io.github.islam:chart:1.1.0")
+//                implementation(project(":chart"))
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)

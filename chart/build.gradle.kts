@@ -11,7 +11,7 @@ plugins {
     kotlin("native.cocoapods")
 }
 
-group = "io.github.thechance101"
+group = "io.github.islam"
 version = "1.1.0"
 
 kotlin {
