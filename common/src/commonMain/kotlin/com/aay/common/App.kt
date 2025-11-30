@@ -8,16 +8,16 @@ fun App() {
     /** Sample of Line Chart **/
     LineChartSample()
 
-
-    /** Sample of Bar Chart **/
-    BarChartSample()
-
-    /** Sample of Donut Chart **/
-    DonutChartSample()
-
-    /** sample of Pie Chart **/
-    PieChartSample()
-
-    /** Sample of Radar Chart **/
-    RadarChartSample()
+//
+//    /** Sample of Bar Chart **/
+//    BarChartSample()
+//
+//    /** Sample of Donut Chart **/
+//    DonutChartSample()
+//
+//    /** sample of Pie Chart **/
+//    PieChartSample()
+//
+//    /** Sample of Radar Chart **/
+//    RadarChartSample()
 }

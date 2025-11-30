@@ -63,6 +63,16 @@ internal fun DrawScope.drawQuarticLineWithShadow(
         }
     }
 
+
+    drawCircles(
+        lineParameter = line,
+        lowerValue = lowerValue,
+        upperValue = upperValue,
+        spacingY = spacingY,
+        textMeasure = textMeasurer,
+        xRegionWidth = xRegionWidth,
+        offsetAdjustment = 11
+    )
 }
 
 @OptIn(ExperimentalTextApi::class)

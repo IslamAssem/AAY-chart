@@ -2,12 +2,17 @@ package com.aay.compose.lineChart.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.clipRect
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextMeasurer
@@ -59,6 +64,15 @@ internal fun DrawScope.drawDefaultLineWithShadow(
             )
         }
     }
+
+    drawCircles(
+        lineParameter = line,
+        lowerValue = lowerValue,
+        upperValue = upperValue,
+        spacingY = spacingY,
+        textMeasure = textMeasure,
+        xRegionWidth = xRegionWidth
+    )
 }
 
 @OptIn(ExperimentalTextApi::class)
@@ -70,7 +84,7 @@ private fun DrawScope.drawLineAsDefault(
     spacingY: Dp,
     clickedPoints: MutableList<Pair<Float, Float>>,
     textMeasure: TextMeasurer,
-    xRegionWidth: Dp,
+    xRegionWidth: Dp
 ) = Path().apply {
     val height = size.height.toDp()
     drawPathLineWrapper(
@@ -82,7 +96,7 @@ private fun DrawScope.drawLineAsDefault(
         val yTextLayoutResult = textMeasure.measure(
             text = AnnotatedString(upperValue.formatToThousandsMillionsBillions()),
         ).size.width
-        val textSpace = yTextLayoutResult - (yTextLayoutResult/4)
+        val textSpace = yTextLayoutResult - (yTextLayoutResult / 4)
         val info = lineParameter.data[index]
         val ratio = (info - lowerValue) / (upperValue - lowerValue)
         val startXPoint = (textSpace * 1.5.toFloat().toDp()) + (index * xRegionWidth)
@@ -115,8 +129,51 @@ private fun DrawScope.drawLineAsDefault(
         if (index == 0) {
             moveTo(startXPoint.toPx(), startYPoint.toFloat())
         } else {
+//            addOval(
+//                Rect(
+//                    left = startXPoint.toPx() - 2.dp,
+//                    top = startYPoint - 2.dp,
+//                    right = startXPoint.toPx() + 2.dp,.toPx()
+//                    bottom = startYPoint + 2.dp.toPx()
+//                )
+//            )
             lineTo(startXPoint.toPx(), startYPoint.toFloat())
         }
+
+        val radius = 4.dp.toPx()
+//        drawCircle(
+//            color = Color.Black,
+//            radius = radius,
+//            center = androidx.compose.ui.geometry.Offset(startXPoint.toPx(), startYPoint.toFloat()),
+//            style = Stroke(width = 2.dp.toPx())
+//        )
+    }
+}
+
+@OptIn(ExperimentalTextApi::class)
+fun DrawScope.drawCircles(
+    lineParameter: LineParameters,
+    lowerValue: Float,
+    upperValue: Float,
+    spacingY: Dp,
+    textMeasure: TextMeasurer,
+    xRegionWidth: Dp,
+    offsetAdjustment: Int = 8
+) {
+
+    lineParameter.data.indices.onEach { index ->
+        val height = size.height.toDp()
+        val yTextLayoutResult = textMeasure.measure(
+            text = AnnotatedString(upperValue.formatToThousandsMillionsBillions()),
+        ).size.width
+        val textSpace = yTextLayoutResult - (yTextLayoutResult / 4)
+        val info = lineParameter.data[index]
+        val ratio = (info - lowerValue) / (upperValue - lowerValue)
+        val startXPoint = (textSpace * 1.5.toFloat().toDp()) + (index * xRegionWidth)
+        val startYPoint =
+            (height.toPx() + offsetAdjustment.dp.toPx() - spacingY.toPx() - (ratio * (height.toPx() - spacingY.toPx())))
+
+        lineParameter.pointDrawer?.drawPoint( this, androidx.compose.ui.geometry.Offset(startXPoint.toPx(), startYPoint.toFloat()))
     }
 }
 
